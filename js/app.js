@@ -7,7 +7,7 @@ fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=48cb631a848d6fe6108
     }
   })
   .then(genreList => {
-    getMovieList(genreList);
+    getMovieList(genreList.genres);
   })
 
 function getMovieList(list) {
@@ -20,6 +20,5 @@ function getMovieList(list) {
       }
     })
     .then(movieList => {
-      
     })
 }
