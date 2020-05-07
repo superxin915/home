@@ -20,5 +20,15 @@ function getMovieList(list) {
       }
     })
     .then(movieList => {
+      list.forEach(genre => {
+        genre.movie = [];
+        movieList.results.forEach(movie => {
+          const foundMovie = movie.genre_ids.find(id => id === genre.id);
+          if (foundMovie != undefined) {
+            genre.movie.push(movie);
+          } 
+        })
+      });
+      console.log(list);
     })
 }
