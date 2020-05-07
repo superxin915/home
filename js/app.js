@@ -6,11 +6,11 @@ fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=48cb631a848d6fe6108
       throw new Error(`Fail to get data.`);
     }
   })
-  .then(genreList => {
-    getMovieList(genreList.genres);
+  .then(result => {
+    getMovieList(result.genres);
   })
 
-function getMovieList(list) {
+function getMovieList(genreList) {
   fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=48cb631a848d6fe61082677d12aca120`)
     .then(data => {
       if (data.ok) {
@@ -20,15 +20,25 @@ function getMovieList(list) {
       }
     })
     .then(movieList => {
-      list.forEach(genre => {
+      genreList.forEach(genre => {
         genre.movie = [];
+
         movieList.results.forEach(movie => {
           const foundMovie = movie.genre_ids.find(id => id === genre.id);
+
           if (foundMovie != undefined) {
             genre.movie.push(movie);
-          } 
+          }
         })
       });
-      console.log(list);
+
+      return genreList.filter(genre => genre.movie.length !== 0);
     })
+    .then(list => {
+      insertContent(list);
+    })
+}
+
+function insertContent(list) {
+
 }
