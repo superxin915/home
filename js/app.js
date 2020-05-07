@@ -40,5 +40,41 @@ function getMovieList(genreList) {
 }
 
 function insertContent(list) {
+  const page = document.querySelector(`#root`);
+  let strHTML = ``;
 
+  list.forEach(genre => {
+    strHTML += `
+    <div class="titleList">
+      <div class="title">
+        <h1>${genre.name}</h1>
+        <div class="titles-wrapper">`;
+
+    genre.movie.forEach(movie => {
+      strHTML += `
+      <div class="movie">
+        <img src="https://image.tmdb.org/t/p/w500${movie.backdrop_path}"/>
+        <div class="overlay">
+          <div class="title">${movie.title}</div>
+          <div class="rating">${movie.vote_average}/10</div>
+          <div class="plot">${movie.overview}</div>
+          <div class="listToggle">
+            <div>
+              <i class="fa fa-fw fa-plus"></i>
+              <i class="fa fa-fw fa-check"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      `;
+    })
+
+    strHTML += `
+          </div>
+        </div>
+      </div>
+    `;
+  })
+
+  page.insertAdjacentHTML(`beforeend`, strHTML);
 }
