@@ -1,17 +1,19 @@
-fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=48cb631a848d6fe61082677d12aca120&language=en-US`)
+const apiKey = `48cb631a848d6fe61082677d12aca120`;
+
+fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=en-US`)
   .then(data => {
     if (data.ok) {
       return data.json();
     } else {
       throw new Error(`Fail to get data.`);
     }
-  })
+  })     
   .then(result => {
     getMovieList(result.genres);
   })
 
 function getMovieList(genreList) {
-  fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=48cb631a848d6fe61082677d12aca120`)
+  fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${apiKey}`)
     .then(data => {
       if (data.ok) {
         return data.json();
@@ -54,7 +56,7 @@ function insertContent(list) {
     genre.movie.forEach(movie => {
       strHTML += `
       <div class="movie">
-        <img src="https://image.tmdb.org/t/p/w500${movie.backdrop_path}"/>
+        <img src="https://image.tmdb.org/t/p/w500/${movie.backdrop_path}"/>
         <div class="overlay">
           <div class="title">${movie.title}</div>
           <div class="rating">${movie.vote_average}/10</div>
