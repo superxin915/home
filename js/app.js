@@ -25,6 +25,7 @@ function getMovieList(genreList) {
 
         movieList.results.forEach(movie => {
           const foundMovie = movie.genre_ids.find(id => id === genre.id);
+          movie.myList = `false`;
 
           if (foundMovie != undefined) {
             genre.movie.push(movie);
