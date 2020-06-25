@@ -1,7 +1,4 @@
-# SD140-Exercise8
+# MITTFLIX_beta_v1.0
 
-Using API to fetch data to build the movie Web App.
+Using API to fetch data then display to user.
 
-Here is the link for the page.
-
-https://yuxinli915.github.io/SD140-Exercise8/
